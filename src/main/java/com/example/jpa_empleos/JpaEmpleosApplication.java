@@ -24,7 +24,12 @@ public class JpaEmpleosApplication implements CommandLineRunner{
 
 	@Override 
 	public void run(String... args) throws Exception{
-		eliminar();
+		obtenerTodos();
+	}
+
+	private void obtenerTodos(){
+		Iterable<Categoria> categorias = categoriasRepo.findAll();
+		System.out.println(categorias);
 	}
 
 	private void eliminar(){
