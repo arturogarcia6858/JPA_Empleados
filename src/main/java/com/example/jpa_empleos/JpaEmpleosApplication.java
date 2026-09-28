@@ -24,7 +24,13 @@ public class JpaEmpleosApplication implements CommandLineRunner{
 
 	@Override 
 	public void run(String... args) throws Exception{
-		modificar();
+		eliminar();
+	}
+
+	private void eliminar(){
+		int idCategoria = 1;
+		categoriasRepo.deleteById(idCategoria);
+		System.out.println("Registro eliminado");
 	}
 
 	private void modificar(){
@@ -52,19 +58,15 @@ public class JpaEmpleosApplication implements CommandLineRunner{
 		}
 	}
 
-	public void guardar(){
+	public void guardar(String nombre, String descripcion){
 		System.out.println("Guardando");
 		Categoria nuevaCategoria = new Categoria();
 
-		nuevaCategoria.setNombre("Finanzas");
-		nuevaCategoria.setDescripcion("Trabajos relacionados con finanzas y contabilidad");
+		nuevaCategoria.setNombre(nombre);
+		nuevaCategoria.setDescripcion(descripcion);
 
 		categoriasRepo.save(nuevaCategoria);
 		System.out.println(nuevaCategoria);
-	}
-
-	public void eliminar(){
-		System.out.println("Eliminando");
 	}
 
 }
