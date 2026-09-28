@@ -1,5 +1,7 @@
 package com.example.jpa_empleos;
 
+import java.util.Optional;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,7 +24,16 @@ public class JpaEmpleosApplication implements CommandLineRunner{
 
 	@Override 
 	public void run(String... args) throws Exception{
-		guardar();
+		buscarPorId();
+	}
+
+	private void buscarPorId(){
+		Optional<Categoria> categoriaBuscada = categoriasRepo.findById(5);
+		if(categoriaBuscada.isPresent()){
+			System.out.println(categoriaBuscada.get());
+		}else{
+			System.out.println("Categoria no encontrada");
+		}
 	}
 
 	public void guardar(){
