@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.example.jpa_empleos.models.Categoria;
 import com.example.jpa_empleos.repository.CategoriasRepository;
 
 @SpringBootApplication
@@ -22,12 +23,17 @@ public class JpaEmpleosApplication implements CommandLineRunner{
 	@Override 
 	public void run(String... args) throws Exception{
 		guardar();
-		eliminar();
-		System.out.println(categoriasRepo);
 	}
 
 	public void guardar(){
 		System.out.println("Guardando");
+		Categoria nuevaCategoria = new Categoria();
+
+		nuevaCategoria.setNombre("Finanzas");
+		nuevaCategoria.setDescripcion("Trabajos relacionados con finanzas y contabilidad");
+
+		categoriasRepo.save(nuevaCategoria);
+		System.out.println(nuevaCategoria);
 	}
 
 	public void eliminar(){
