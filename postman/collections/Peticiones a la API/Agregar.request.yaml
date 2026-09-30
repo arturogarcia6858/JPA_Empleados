@@ -1,0 +1,14 @@
+$kind: http-request
+description: ""
+url: http://localhost:8080/api/categorias
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"nombre\":\"Programación Paralela\",\r
+
+    \    \"descripcion\":\"Vacantes relacionados con programación\"\r
+
+    }"
+order: 976007759018254
