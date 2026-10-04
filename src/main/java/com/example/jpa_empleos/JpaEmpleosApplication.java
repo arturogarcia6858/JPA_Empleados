@@ -26,14 +26,18 @@ public class JpaEmpleosApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		buscarTodasJPA();
+		borrarTodasEnBloque();
 	}
 
 	private void buscarTodasJPA(){
 		List<Categoria> categorias = categoriasJPARepo.findAll();
 		for(Categoria categoria : categorias){
-			System.out.println(categoria.getId() + "" + categoria.getNombre());
+			System.out.println(categoria.getId() + " " + categoria.getNombre());
 		}
+	}
+
+	private void borrarTodasEnBloque(){
+		categoriasJPARepo.deleteAllInBatch();
 	}
 
 }
