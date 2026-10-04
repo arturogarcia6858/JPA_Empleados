@@ -29,7 +29,7 @@ public class JpaEmpleosApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		buscarTodosPorPaginacion();
+		buscarTodosPaginacionOrdenamiento();
 	}
 
 	private void buscarTodasJPA(){
@@ -57,6 +57,16 @@ public class JpaEmpleosApplication implements CommandLineRunner{
 		for(Categoria categoria : page.getContent()){
 			System.out.println(categoria.getId() + " " + categoria.getNombre());
 		}
+	}
+
+	private void buscarTodosPaginacionOrdenamiento(){
+		//Page<Categoria> page = categoriasJPARepo.findAll(PageRequest.of(0, 5, Sort.by("nombre")));
+		Page<Categoria> page = categoriasJPARepo.findAll(PageRequest.of(0, 5, Sort.by("nombre").descending()));
+		System.out.println("Total de registros: " + page.getTotalElements());
+		System.out.println("Total de páginas: " + page.getTotalPages());
+		for(Categoria categoria: page.getContent()){
+			System.out.println(categoria.getId() + " " + categoria.getNombre());
+		} 
 	}
 
 }
