@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Sort;
 
 import com.example.jpa_empleos.models.Categoria;
 import com.example.jpa_empleos.repository.CategoriasJPARepository;
@@ -26,7 +27,7 @@ public class JpaEmpleosApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		borrarTodasEnBloque();
+		buscarTodosOrdenados();
 	}
 
 	private void buscarTodasJPA(){
@@ -38,6 +39,14 @@ public class JpaEmpleosApplication implements CommandLineRunner{
 
 	private void borrarTodasEnBloque(){
 		categoriasJPARepo.deleteAllInBatch();
+	}
+
+	private void buscarTodosOrdenados(){
+		//List<Categoria> categorias = categoriasJPARepo.findAll(Sort.by("nombre").descending());
+		List<Categoria> categorias = categoriasJPARepo.findAll(Sort.by("nombre").descending());
+		for(Categoria categoria : categorias){
+			System.out.println(categoria.getId() + " " + categoria.getNombre());
+		}
 	}
 
 }
