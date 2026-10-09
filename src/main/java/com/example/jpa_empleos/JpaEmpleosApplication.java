@@ -29,7 +29,8 @@ public class JpaEmpleosApplication implements CommandLineRunner{
 	private void buscarVacantes(){
 		List<Vacante> vacantes = vacantesRepo.findAll();
 		for(Vacante vacante : vacantes){
-			System.out.println(vacante.getId() + ". " + vacante.getNombre());
+			System.out.println(vacante.getId() + ". " + vacante.getNombre() + 
+		" -> " + vacante.getCategoria().getNombre());
 		}
 	}
 
