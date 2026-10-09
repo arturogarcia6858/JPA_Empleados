@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.boot.CommandLineRunner;
@@ -95,8 +96,8 @@ public class JpaEmpleosApplication implements CommandLineRunner{
 	private void crearUsuarioConPerfiles(){
 		Usuario usuarioN = new Usuario();
 		usuarioN.setNombre("José García");
-		usuarioN.setEmail("jose@gmail.com");
-		usuarioN.setUsername("joseg");
+		usuarioN.setEmail("jose2@gmail.com");
+		usuarioN.setUsername("joseg2");
 		usuarioN.setPassword("12345");
 		usuarioN.setEstatus(1);
 		usuarioN.setFechaRegistro(LocalDate.now());
@@ -115,6 +116,18 @@ public class JpaEmpleosApplication implements CommandLineRunner{
 		usuarioN.setPerfiles(perfilesUsuario);
 
 		usuarioRepo.save(usuarioN);
+	}
+
+	private void buscarUsuario(){
+		Optional<Usuario> usuarioOptional = usuarioRepo.findById(1);
+		if(usuarioOptional.isPresent()){
+			Usuario usuario = usuarioOptional.get();
+			System.out.println("Nombre: " + usuario.getNombre());
+			System.out.println("Perfiles asignados");
+			for(Perfil perfil : usuario.getPerfiles()){
+				System.out.println(perfil.getId());
+			}
+		}
 	}
 
 }
