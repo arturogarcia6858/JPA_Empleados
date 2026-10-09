@@ -33,7 +33,7 @@ public class JpaEmpleosApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		crearUsuarioConPerfiles();	
+		//buscarUsuario();	
 }
 
 	public JpaEmpleosApplication(VacantesRepository vacantesRepo, PerfilesRepository perfilesRepo, UsuarioRepository usuarioRepo){
@@ -119,7 +119,7 @@ public class JpaEmpleosApplication implements CommandLineRunner{
 	}
 
 	private void buscarUsuario(){
-		Optional<Usuario> usuarioOptional = usuarioRepo.findById(1);
+		Optional<Usuario> usuarioOptional = usuarioRepo.findById(2);
 		if(usuarioOptional.isPresent()){
 			Usuario usuario = usuarioOptional.get();
 			System.out.println("Nombre: " + usuario.getNombre());
@@ -127,6 +127,8 @@ public class JpaEmpleosApplication implements CommandLineRunner{
 			for(Perfil perfil : usuario.getPerfiles()){
 				System.out.println(perfil.getId());
 			}
+		}else{
+			System.out.println("Usuario no encontrado");
 		}
 	}
 
