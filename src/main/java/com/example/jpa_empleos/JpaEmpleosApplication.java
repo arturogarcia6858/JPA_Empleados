@@ -1,8 +1,11 @@
 package com.example.jpa_empleos;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.example.jpa_empleos.models.Categoria;
 import com.example.jpa_empleos.models.EstatusVacante;
 import com.example.jpa_empleos.models.Perfil;
+import com.example.jpa_empleos.models.Usuario;
 import com.example.jpa_empleos.models.Vacante;
 import com.example.jpa_empleos.repository.PerfilesRepository;
 import com.example.jpa_empleos.repository.UsuarioRepository;
@@ -28,7 +32,7 @@ public class JpaEmpleosApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		crearPerfiles();	
+		crearUsuarioConPerfiles();	
 }
 
 	public JpaEmpleosApplication(VacantesRepository vacantesRepo, PerfilesRepository perfilesRepo, UsuarioRepository usuarioRepo){
@@ -86,6 +90,31 @@ public class JpaEmpleosApplication implements CommandLineRunner{
 
 		return perfiles;
 
+	}
+
+	private void crearUsuarioConPerfiles(){
+		Usuario usuarioN = new Usuario();
+		usuarioN.setNombre("José García");
+		usuarioN.setEmail("jose@gmail.com");
+		usuarioN.setUsername("joseg");
+		usuarioN.setPassword("12345");
+		usuarioN.setEstatus(1);
+		usuarioN.setFechaRegistro(LocalDate.now());
+
+		Perfil perfil1 = new Perfil();
+		perfil1.setId(6);
+		
+		Perfil perfil2 = new Perfil();
+		perfil2.setId(7);
+
+
+		Set<Perfil> perfilesUsuario = new HashSet<>();
+		perfilesUsuario.add(perfil1);
+		perfilesUsuario.add(perfil2);
+
+		usuarioN.setPerfiles(perfilesUsuario);
+
+		usuarioRepo.save(usuarioN);
 	}
 
 }
